@@ -1,0 +1,120 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f0f0f0;
+}
+
+nav {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+nav ul li a:hover {
+    background-color: #f0f0f0;
+}
+
+nav ul li:first-child::before {
+    content: "• ";
+    margin-right: 5px;
+}
+
+nav ul li:last-child::after {
+    content: " •";
+    margin-left: 5px;
+}
+
+nav ul li:not(:last-child)::after {
+    content: "ʘ⁠‿⁠ʘ";
+    margin-left: 27px;
+    margin-right: 0px;
+}
+
+
+h1 {
+    color: #000000;
+    text-align: center;
+}
+
+h2, h3 {
+    color: #000000;
+    text-align: center;
+}
+
+p1 {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+}
+
+p2 {
+    color: #ffffff;
+    font-size: 18.72px;
+    font-weight: bold;
+    text-align: center;
+}
+
+p3 {
+    color: #ffffff;
+    text-align: center;
+}
+
+p4 {
+    color: #808080;
+    text-align: center;
+}
+
+p {
+    color: #8888;
+}
+
+
+/* Hero section */
+#hero {
+    background-image: url('hero-background.jpg');
+    background-size: cover;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-content {
+    text-align: center;
+    color: #fff;
+    animation: fadeInUp 1s ease;
+}
+
+.hero-image {
+    /* Add animation for the image */
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
