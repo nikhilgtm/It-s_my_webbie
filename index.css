@@ -1,6 +1,6 @@
 body {
     font-family: 'Montserrat', sans-serif;
-    background-color: #f0f0f0;
+    background-color: dark;
 }
 
 nav {
@@ -21,14 +21,14 @@ nav ul li {
 
 nav ul li a {
     text-decoration: none;
-    color: #333;
+    color: white;
     font-size: 16px;
     padding: 10px;
     border-radius: 5px;
 }
 
 nav ul li a:hover {
-    background-color: #f0f0f0;
+    background-color: grey;
 }
 
 nav ul li:first-child::before {
@@ -49,12 +49,12 @@ nav ul li:not(:last-child)::after {
 
 
 h1 {
-    color: #000000;
+    color: #08080;
     text-align: center;
 }
 
 h2, h3 {
-    color: #000000;
+    color: #08080;
     text-align: center;
 }
 
@@ -78,12 +78,12 @@ p3 {
 }
 
 p4 {
-    color: #808080;
+    color: grey;
     text-align: center;
 }
 
 p {
-    color: #8888;
+    color: #ffffff;
 }
 
 
