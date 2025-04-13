@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🔧 Nikhil Gautam | Portfolio</title>
+  <meta name="description" content="Portfolio of Nikhil Gautam, a mechanical engineering student passionate about robotics and design." />
+  <meta name="keywords" content="mechanical engineering, robotics, design, portfolio, Nikhil Gautam" />
+  <link rel="icon" type="image/png" href="wrench-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    :root {
+      --primary: #4A2A5A;
+      --secondary: #A63A50;
+      --accent: #F5CDA7;
+      --light: #FFF9F5;
+      --dark: #2F1A3A;
+      --card-bg: rgba(245, 205, 167, 0.15);
+      --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      /* Fallback solid color */
+      background-color: var(--primary);
+      /* Combine the gradient and mountain ridge pattern */
+      background-image: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%),
+                        repeating-linear-gradient(
+                          45deg,
+                          transparent,
+                          transparent 10px,
+                          rgba(245, 205, 167, 0.05) 10px, /* Using --accent (#F5CDA7) with 5% opacity for better visibility */
+                          rgba(245, 205, 167, 0.05) 20px
+                        );
+      color: var(--light);
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* Add text-shadow to improve readability */
+    nav ul li a,
+    header h1,
+    header p,
+    .card p,
+    .skills-grid li,
+    .contact-method a,
+    .contact-method p,
+    footer p {
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(245, 205, 167, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 1rem;
+      z-index: 1000;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    nav.hidden {
+      transform: translateY(-100%);
+    }
+
+    nav ul {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+    }
+
+    nav ul li {
+      margin: 0 1rem;
+    }
+
+    nav ul li a {
+      color: var(--light);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: var(--accent);
+    }
+
+    .header-container {
+      position: relative;
+      z-index: 10;
+    }
+
+    .cover {
+      width: 100%;
+      height: 300px;
+      background: linear-gradient(
+          to bottom,
+          rgba(74, 42, 90, 0.5),
+          rgba(166, 58, 80, 0.3)
+        ),
+        url('background.jpg');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+    }
+
+    .profile-pic-container {
+      position: relative;
+      width: 100%;
+      height: 0;
+      z-index: 20;
+    }
+
+    .profile-pic {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      border: 5px solid var(--light);
+      position: absolute;
+      bottom: -110px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #eee url('profile_pic.jpg') center/cover;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      transition: var(--transition);
+    }
+
+    .profile-pic:hover {
+      transform: translateX(-50%) scale(1.05);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    header {
+      padding-top: 140px;
+      text-align: center;
+      position: relative;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      margin-top: -1px;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-top: 60px;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      color: var(--light);
+    }
+
+    header p {
+      font-size: 1.3rem;
+      margin-top: 1rem;
+      opacity: 0.9;
+      font-weight: 300;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+      color: var(--light);
+    }
+
+    header p::after {
+      content: '';
+      display: block;
+      width: 100px;
+      height: 3px;
+      background: var(--accent);
+      margin: 1.5rem auto;
+      border-radius: 3px;
+    }
+
+    .section {
+      padding: 6rem 2rem;
+      max-width: 1100px;
+      margin: auto;
+      position: relative;
+      z-index: 5;
+      scroll-margin-top: 60px;
+    }
+
+    .section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      color: var(--accent);
+      position: relative;
+      display: inline-block;
+    }
+
+    .section h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60%;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 3px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      transition: var(--transition);
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+      background: rgba(245, 205, 167, 0.2);
+    }
+
+    .card h3 {
+      color: var(--accent);
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .card h3 i {
+      margin-right: 10px;
+      font-size: 1.2rem;
+      color: var(--accent);
+    }
+
+    .card p {
+      margin-bottom: 1rem;
+      color: var(--light);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .skills-grid ul {
+      list-style: none;
+    }
+
+    .skills-grid li {
+      margin-bottom: 1rem;
+      position: relative;
+      padding-left: 2rem;
+      font-weight: 400;
+      color: var(--light);
+    }
+
+    .skills-grid li i {
+      margin-right: 0.5rem;
+      color: var(--accent);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .project-card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      transition: var(--transition);
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .project-image {
+      height: 200px;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .project-content {
+      padding: 1.5rem;
+    }
+
+    .project-link {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background: var(--accent);
+      color: var(--dark);
+      text-decoration: none;
+      border-radius: 5px;
+      transition: var(--transition);
+    }
+
+    .project-link:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .contact-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .contact-method {
+      flex: 1;
+      min-width: 300px;
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      transition: var(--transition);
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .contact-method i {
+      font-size: 2rem;
+      color: var(--accent);
+      margin-right: 1.5rem;
+      min-width: 40px;
+      text-align: center;
+    }
+
+    .contact-text {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      height: 40px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .contact-method a, .contact-method p {
+      color: var(--light);
+      text-decoration: none;
+      font-size: 1.1rem;
+    }
+
+    .contact-method a:hover {
+      color: var(--accent);
+    }
+
+    .socials {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .socials a {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--card-bg);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      transition: var(--transition);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      text-decoration: none;
+    }
+
+    .socials a:hover {
+      background: var(--accent);
+      color: var(--dark);
+      transform: translateY(-5px);
+    }
+
+    footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      font-size: 1rem;
+      opacity: 0.8;
+      background: rgba(0, 0, 0, 0.2);
+      position: relative;
+      z-index: 5;
+      color: var(--light);
+    }
+
+    .cursor {
+      animation: blink 0.7s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section {
+      animation: fadeIn 0.8s ease-out forwards;
+    }
+
+    .section:nth-child(1) { animation-delay: 0.1s; }
+    .section:nth-child(2) { animation-delay: 0.2s; }
+    .section:nth-child(3) { animation-delay: 0.3s; }
+    .section:nth-child(4) { animation-delay: 0.4s; }
+
+    @media (max-width: 768px) {
+      .cover {
+        height: 250px;
+      }
+
+      header h1 {
+        font-size: 2.2rem;
+      }
+
+      header p {
+        font-size: 1.1rem;
+      }
+
+      .section {
+        padding: 4rem 1.5rem;
+      }
+
+      .section h2 {
+        font-size: 2rem;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-method {
+        min-width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .cover {
+        height: 200px;
+      }
+
+      .profile-pic {
+        width: 180px;
+        height: 180px;
+        bottom: -90px;
+      }
+
+      header h1 {
+        font-size: 1.8rem;
+        margin-top: 50px;
+      }
+
+      .section h2 {
+        font-size: 1.8rem;
+      }
+
+      .card {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav id="navbar">
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  
+  <div class="header-container">
+    <div class="cover"></div>
+    <div class="profile-pic-container">
+      <div class="profile-pic" role="img" aria-label="Profile picture of Nikhil Gautam"></div>
+    </div>
+  </div>
+  
+  <header>
+    <h1>Nikhil Gautam</h1>
+    <p id="typewriter">Mechanical Engineer | Designer | Music Lover</p>
+  </header>
+
+  <section class="section" id="about">
+    <h2><i class="fas fa-user"></i> About Me</h2>
+    <div class="card">
+      <p>I'm Nikhil Gautam, a mechanical engineering student driven by a passion for robotics, design, and purposeful innovation. When I'm not immersed in coursework or exploring cutting-edge advancements, I'm often dissecting the intersection of technology and creativity through self-driven learning and experimentation.</p>
+      <p>My work revolves around merging technical precision with inventive problem-solving. I specialize in breaking down complex challenges to craft intuitive, elegant solutions—whether in robotics, mechanical systems, or user-centric design. To me, exceptional engineering isn't just about functionality; it's about creating seamless bridges between ideas and reality, ensuring technology feels accessible, meaningful, and quietly transformative.</p>
+    </div>
+  </section>
+
+  <section class="section" id="projects">
+    <h2><i class="fas fa-project-diagram"></i> Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-image" style="background-image: url('aquaboat.jpg')" role="img" aria-label="Image of Autonomous Aquaboat project"></div>
+        <div class="project-content">
+          <h3>Autonomous Aquaboat</h3>
+          <p>Designed and built a Bluetooth & ultrasonic sensor-based racing boat for a robotics competition. Custom twin-propeller system and Arduino Nano for control logic.</p>
+          <a href="https://github.com/nikhilgautam/aquaboat" class="project-link">View Project</a>
+        </div>
+      </div>
+      
+      <div class="project-card">
+        <div class="project-image" style="background-image: url('CNC.jpg')" role="img" aria-label="Image of Custom CNC Machine project"></div>
+        <div class="project-content">
+          <h3>Custom CNC Machine</h3>
+          <p>Worked on developing and assembling a CNC machine for precise material cutting and prototyping. Focused on the mechanical setup and tuning the motion control components.</p>
+          <a href="https://github.com/nikhilgautam/cnc-machine" class="project-link">View Project</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="skills">
+    <h2><i class="fas fa-code"></i> Skills</h2>
+    <div class="card">
+      <div class="skills-grid">
+        <ul>
+          <li><i class="fas fa-cogs"></i> Mechanical Design & Engineering</li>
+          <li><i class="fas fa-paint-brush"></i> Graphic Design</li>
+          <li><i class="fas fa-cube"></i> Fusion 360</li>
+          <li><i class="fas fa-palette"></i> Canva</li>
+        </ul>
+        <ul>
+          <li><i class="fas fa-vector-square"></i> Illustrator</li>
+          <li><i class="fas fa-chalkboard-teacher"></i> PowerPoint</li>
+          <li><i class="fas fa-blender"></i> Blender</li>
+          <li><i class="fas fa-guitar"></i> Guitar Playing</li>
+        </ul>
+        <ul>
+          <li><i class="fas fa-print"></i> 3D Printing</li>
+          <li><i class="fas fa-file-alt"></i> Technical Documentation</li>
+          <li><i class="fas fa-tasks"></i> Project Management</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <h2><i class="fas fa-envelope"></i> Contact</h2>
+    <div class="card">
+      <p>Want to collaborate or just say hi? I'm always open to discussing new projects, creative ideas or opportunities to be part of your vision.</p>
+      
+      <div class="contact-info">
+        <div class="contact-method">
+          <i class="fas fa-envelope"></i>
+          <div class="contact-text">
+            <a href="mailto:thegautamguy@gmail.com">thegautamguy@gmail.com</a>
+          </div>
+        </div>
+        
+        <div class="contact-method">
+          <i class="fas fa-phone"></i>
+          <div class="contact-text">
+            <a href="tel:+9779800738067">+977 9800738067</a>
+          </div>
+        </div>
+        
+        <div class="contact-method">
+          <i class="fas fa-map-marker-alt"></i>
+          <div class="contact-text">
+            <p>Pokhara, Nepal</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="socials">
+        <a href="https://www.linkedin.com/in/nikhil-gautam-58597a30a/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://www.instagram.com/im_nikhil_gtm/" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://github.com/nikhilgtm" target="_blank"><i class="fab fa-github"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Nikhil Gautam</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const typewriter = document.getElementById('typewriter');
+      const text = typewriter.textContent;
+      typewriter.innerHTML = '<span class="cursor">|</span>';
+      let i = 0;
+
+      function type() {
+        if (i < text.length) {
+          typewriter.innerHTML = text.substring(0, i + 1) + '<span class="cursor">|</span>';
+          i++;
+          setTimeout(type, 100);
+        } else {
+          typewriter.innerHTML = text + '<span class="cursor">|</span>';
+        }
+      }
+      type();
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = 1;
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll('.section').forEach(section => {
+        observer.observe(section);
+      });
+
+      let lastScrollTop = 0;
+      const navbar = document.getElementById('navbar');
+
+      window.addEventListener('scroll', function() {
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        if (scrollTop > lastScrollTop) {
+          navbar.classList.add('hidden');
+        } else {
+          navbar.classList.remove('hidden');
+        }
+        lastScrollTop = scrollTop;
+      });
+    });
+  </script>
+</body>
+</html>
