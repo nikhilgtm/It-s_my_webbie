@@ -31,24 +31,32 @@
     }
 
     body {
-      /* Fallback solid color */
       background-color: var(--primary);
-      /* Combine the gradient and mountain ridge pattern */
       background-image: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%),
                         repeating-linear-gradient(
                           45deg,
                           transparent,
                           transparent 10px,
-                          rgba(245, 205, 167, 0.05) 10px, /* Using --accent (#F5CDA7) with 5% opacity for better visibility */
+                          rgba(245, 205, 167, 0.05) 10px,
                           rgba(245, 205, 167, 0.05) 20px
                         );
       color: var(--light);
       min-height: 100vh;
       overflow-x: hidden;
       line-height: 1.6;
+      position: relative;
     }
 
-    /* Add text-shadow to improve readability */
+    #background-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
     nav ul li a,
     header h1,
     header p,
@@ -397,7 +405,7 @@
 
     footer {
       text-align: center;
-      padding: 3rem 2rem;
+      padding: 2rem;
       font-size: 1rem;
       opacity: 0.8;
       background: rgba(0, 0, 0, 0.2);
@@ -457,6 +465,10 @@
       .contact-method {
         min-width: 100%;
       }
+
+      footer {
+        padding: 1.5rem;
+      }
     }
 
     @media (max-width: 480px) {
@@ -482,11 +494,17 @@
       .card {
         padding: 1.5rem;
       }
+
+      footer {
+        padding: 1rem;
+      }
     }
   </style>
 </head>
 
 <body>
+  <canvas id="background-canvas"></canvas>
+
   <nav id="navbar">
     <ul>
       <li><a href="#about">About</a></li>
@@ -520,7 +538,7 @@
     <h2><i class="fas fa-project-diagram"></i> Projects</h2>
     <div class="projects-grid">
       <div class="project-card">
-        <div class="project-image" style="background-image: url('aquaboat.JPG')" role="img" aria-label="Image of Autonomous Aquaboat project"></div>
+        <div class="project-image" style="background-image: url('aquaboat.jpg')" role="img" aria-label="Image of Autonomous Aquaboat project"></div>
         <div class="project-content">
           <h3>Autonomous Aquaboat</h3>
           <p>Designed and built a Bluetooth & ultrasonic sensor-based racing boat for a robotics competition. Custom twin-propeller system and Arduino Nano for control logic.</p>
@@ -601,11 +619,12 @@
   </section>
 
   <footer>
-    <p>© 2025 Nikhil Gautam</p>
+    <p>© 2025 | Nikhil Gautam</p>
   </footer>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
+      // Typewriter Effect
       const typewriter = document.getElementById('typewriter');
       const text = typewriter.textContent;
       typewriter.innerHTML = '<span class="cursor">|</span>';
@@ -622,6 +641,7 @@
       }
       type();
 
+      // Intersection Observer for Sections
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -635,6 +655,7 @@
         observer.observe(section);
       });
 
+      // Navbar Scroll Behavior
       let lastScrollTop = 0;
       const navbar = document.getElementById('navbar');
 
@@ -647,6 +668,113 @@
         }
         lastScrollTop = scrollTop;
       });
+
+      // Background Animations (Lines and Particles only)
+      const canvas = document.getElementById('background-canvas');
+      if (!canvas) {
+        console.error("Canvas element not found!");
+        return;
+      }
+      const ctx = canvas.getContext('2d');
+      let width, height;
+
+      function resizeCanvas() {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+      }
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+
+      // Background Particles
+      const particles = [];
+      const particleCount = window.innerWidth < 768 ? 50 : 100;
+      class Particle {
+        constructor() {
+          this.x = Math.random() * width;
+          this.y = Math.random() * height;
+          this.vx = (Math.random() - 0.5) * 0.5;
+          this.vy = (Math.random() - 0.5) * 0.5;
+          this.radius = Math.random() * 2 + 1;
+          this.alpha = Math.random() * 0.3 + 0.1;
+        }
+
+        update() {
+          this.x += this.vx;
+          this.y += this.vy;
+
+          if (this.x < 0 || this.x > width) this.vx *= -1;
+          if (this.y < 0 || this.y > height) this.vy *= -1;
+        }
+
+        draw() {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(245, 205, 167, ${this.alpha})`;
+          ctx.fill();
+        }
+      }
+
+      for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+      }
+
+      // Background Lines
+      const lines = [];
+      const lineCount = 5;
+      class Line {
+        constructor() {
+          this.x = Math.random() * width;
+          this.y = Math.random() * height;
+          this.vx = (Math.random() - 0.5) * 2;
+          this.vy = (Math.random() - 0.5) * 2;
+          this.length = Math.random() * 50 + 50;
+          this.alpha = Math.random() * 0.2 + 0.1;
+        }
+
+        update() {
+          this.x += this.vx;
+          this.y += this.vy;
+
+          if (this.x < 0 || this.x > width) this.vx *= -1;
+          if (this.y < 0 || this.y > height) this.vy *= -1;
+        }
+
+        draw() {
+          ctx.beginPath();
+          ctx.moveTo(this.x, this.y);
+          ctx.lineTo(
+            this.x + this.length * Math.cos(Math.atan2(this.vy, this.vx)),
+            this.y + this.length * Math.sin(Math.atan2(this.vy, this.vx))
+          );
+          ctx.strokeStyle = `rgba(245, 205, 167, ${this.alpha})`;
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+      }
+
+      for (let i = 0; i < lineCount; i++) {
+        lines.push(new Line());
+      }
+
+      // Animation Loop
+      function animate() {
+        ctx.clearRect(0, 0, width, height);
+
+        particles.forEach(particle => {
+          particle.update();
+          particle.draw();
+        });
+
+        lines.forEach(line => {
+          line.update();
+          line.draw();
+        });
+
+        requestAnimationFrame(animate);
+      }
+      animate();
     });
   </script>
 </body>
